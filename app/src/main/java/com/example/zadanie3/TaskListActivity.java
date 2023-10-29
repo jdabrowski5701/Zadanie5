@@ -8,18 +8,10 @@ import android.util.Log;
 
 public class TaskListActivity extends SingleFragmentActivity {
 
-    @Override
-    protected Fragment createFragment(){
-        return new TaskFragment();
-    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-
-
+    protected Fragment createFragment() {
+        return new TaskListFragment();
     }
 }
 
-//Punkt 20
