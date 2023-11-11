@@ -13,8 +13,15 @@ public class TaskStorage {
         tasks = new ArrayList<>();
         for(int i = 1; i <=100; i++){
             Task task = new Task();
-            task.setName("Pilne zadanie numer" + i);
+            task.setName("Zadanie #" + i);
             task.setDone(i % 3 == 0);
+
+            if(i % 3 == 0){
+                task.setCategory(Category.STUDIA);
+            } else {
+                task.setCategory(Category.DOM);
+            }
+
             tasks.add(task);
         }
     }

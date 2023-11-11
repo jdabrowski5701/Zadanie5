@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,8 @@ public class TaskListFragment extends Fragment {
     private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nameTextView;
         private TextView dateTextView;
+        private ImageView iconImageView;
+        private CheckBox doneCheckBox;
         private Task task;
         public TaskHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_task, parent, false));
@@ -61,12 +64,21 @@ public class TaskListFragment extends Fragment {
 
             nameTextView = itemView.findViewById(R.id.task_item_name);
             dateTextView = itemView.findViewById(R.id.task_item_date);
+            iconImageView = itemView.findViewById(R.id.task_item_icon);
+            doneCheckBox = itemView.findViewById(R.id.task_done_checkbox);
         }
 
         public void bind(Task task){
             this.task = task;
             nameTextView.setText(task.getName());
             dateTextView.setText(task.getDate().toString());
+            doneCheckBox.setChecked(task.isDone());
+
+            if(task.getCategory() == Category.DOM){
+                iconImageView.setImageResource(R.drawable.ic_house);
+            }else{
+                iconImageView.setImageResource(R.drawable.ic_school);
+            }
         }
 
         @Override
@@ -74,6 +86,9 @@ public class TaskListFragment extends Fragment {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.putExtra(KEY_EXTRA_TASK_ID, task.getId());
             startActivity(intent);
+        }
+        public CheckBox getCheckBox() {
+            return doneCheckBox;
         }
     }
 
@@ -95,6 +110,11 @@ public class TaskListFragment extends Fragment {
         public void onBindViewHolder(@NonNull TaskHolder holder, int position){
             Task task = tasks.get(position);
             holder.bind(task);
+
+            CheckBox checkBox = holder.getCheckBox();
+            checkBox.setChecked(tasks.get(position).isDone());
+            checkBox.setOnCheckedChangeListener(((buttonView, isChecked) ->
+                    tasks.get(holder.getBindingAdapterPosition()).setDone(isChecked)));
         }
 
         @Override
