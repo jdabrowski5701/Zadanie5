@@ -1,10 +1,16 @@
 package com.example.zadanie3;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -13,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +30,7 @@ public class TaskListFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
     public static final String KEY_EXTRA_TASK_ID = "tasklistfragment.task_id";
+
     public TaskListFragment() {}
 
     @Nullable
@@ -52,6 +60,52 @@ public class TaskListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_task_menu, menu);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int itemId = item.getItemId();
+        Log.d("TaskListFragment", "onOptionsItemSelected: itemId = " + itemId);
+        if (itemId == R.id.new_task) {
+            Task task = new Task();
+            TaskStorage.getInstance().addTask(task);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra(TaskListFragment.KEY_EXTRA_TASK_ID, task.getId());
+            startActivity(intent);
+            return true;
+        } else if (itemId == R.id.show_subtitle) {
+            updateSubtitle();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void updateSubtitle(){
+        TaskStorage taskStorage = TaskStorage.getInstance();
+        List<Task> tasks = taskStorage.getTasks();
+        int todoTasksCount = 0;
+        for (Task task : tasks){
+            if (!task.isDone()){
+                todoTasksCount++;
+            }
+        }
+        String subtitle = getString(R.string.subtitle_format, todoTasksCount);
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        appCompatActivity.getSupportActionBar().setSubtitle(subtitle);
+    }
+
     private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nameTextView;
         private TextView dateTextView;
@@ -73,6 +127,13 @@ public class TaskListFragment extends Fragment {
             nameTextView.setText(task.getName());
             dateTextView.setText(task.getDate().toString());
             doneCheckBox.setChecked(task.isDone());
+
+            if (task.isDone()) {
+                nameTextView.setPaintFlags(nameTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                nameTextView.setPaintFlags(nameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            }
+
 
             if(task.getCategory() == Category.DOM){
                 iconImageView.setImageResource(R.drawable.ic_house);
