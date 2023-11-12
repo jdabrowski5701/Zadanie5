@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="task_item_padding">10dp</dimen>
+    <dimen name="checkbox_size">24dp</dimen>
+    <dimen name="text_view_margin">8dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+</resources>

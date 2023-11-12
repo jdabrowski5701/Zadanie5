@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Zadanie3</string>
+    <string name="app_name" translatable="false">ToDo</string>
     <string name="name_hint">Wpisz nazwę zadania</string>
     <string name="name_label">Nazwa</string>
     <string name="details_label">Szczegóły</string>

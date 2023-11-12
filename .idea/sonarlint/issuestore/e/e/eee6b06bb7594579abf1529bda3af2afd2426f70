@@ -1,14 +1,18 @@
 
+{
+java:S1450""^Remove the "categorySpinner" field and declare it as a local variable in the relevant methods.(É¿«©8™Ù„ù»1
 }
-java:S1450"[Remove the "doneCheckBox" field and declare it as a local variable in the relevant methods.(§¨âŸýÿÿÿÿ8ß˜Úó»1
+java:S1450!"[Remove the "doneCheckBox" field and declare it as a local variable in the relevant methods.(§¨âŸýÿÿÿÿ8šÙ„ù»1
 z
-java:S1450"XRemove the "nameField" field and declare it as a local variable in the relevant methods.(žâê¸þÿÿÿÿ8ß˜Úó»1
+java:S1450"XRemove the "nameField" field and declare it as a local variable in the relevant methods.(žâê¸þÿÿÿÿ8›Ù„ù»1
 Y
-java:S1874-"7Remove this use of "getSerializable"; it is deprecated.(½‚°½ýÿÿÿÿ8ë˜Úó»1
+java:S18741"7Remove this use of "getSerializable"; it is deprecated.(½‚°½ýÿÿÿÿ8ªÙ„ù»1
 
-java:S1186:"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ô—½48í˜Úó»1
+java:S1186>"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ô—½48­Ù„ù»1
 ž
-java:S1186B"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(íÑíÍ8í˜Úó»1
-]	java:S125E"<This block of commented-out lines of code should be removed.(äçý÷þÿÿÿÿ8ï˜Úó»1
+java:S1186F"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(íÑíÍ8­Ù„ù»1
+]	java:S125I"<This block of commented-out lines of code should be removed.(äçý÷þÿÿÿÿ8¯Ù„ù»1
 N
-java:S1602Z",Remove useless curly braces around statement(ìžÑÔÿÿÿÿÿ8ô˜Úó»1
+java:S1602^",Remove useless curly braces around statement(ìžÑÔÿÿÿÿÿ8µÙ„ù»1
+£
+java:S1186k"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¹Æº×þÿÿÿÿ8·Ù„ù»1
